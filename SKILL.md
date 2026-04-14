@@ -12,6 +12,18 @@ Default to perceptual interpolation.
 - Keep stop positions explicit when the source preset already defines them.
 - Output plain CSS unless the user asks for another format.
 
+## Gradient Direction
+
+When outputting gradients, consider the direction based on the container and color brightness:
+
+- **Horizontal containers** (width > height): Use horizontal gradient (`90deg` or `to right`)
+- **Vertical containers** (height > width): Use vertical gradient, with **dark colors at the top and light colors at the bottom** (`180deg` or `to bottom`)
+  - If the preset has light colors first and dark colors last, reverse the gradient direction (`0deg` or `to top`)
+  - This follows natural lighting patterns and creates more stable, comfortable visuals
+- **Square containers** (width ≈ height): Use diagonal gradient (`135deg` or `to bottom right`)
+
+When the user doesn't specify a direction, default to horizontal (`90deg`) for CSS output.
+
 ## Platform Support
 
 This skill supports multiple output formats:
